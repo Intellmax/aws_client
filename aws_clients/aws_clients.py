@@ -163,11 +163,9 @@ if __name__ == "__main__":
                        aws_secret=config.aws_secret_key,
                        aws_region=config.region_name)
 
-    # {'storageclient': <__main__.StorageClient object at 0x10ab3c7d0>, 'snsclient' .... }
     clients = {client.__name__.lower(): client(**credentials) for client in [StorageClient, SNSClient, SQSClient]}
     clients.get('storageclient').buckets()
     clients.get('storageclient').create_bucket('testbuc123900')
     topics = clients.get('snsclient').topics()
-    print(topics)
     clients.get('sqsclient').queues()
     clients.get('storageclient').upload_file('test_file.jpeg', 'testbuck765')
